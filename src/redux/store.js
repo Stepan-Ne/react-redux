@@ -1,6 +1,7 @@
 import rootReducer from './rootReducer';
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
 // when action fly we need to change state with reducer
 // reducer returns the obj - state
@@ -32,7 +33,8 @@ import thunk from 'redux-thunk'
 // REDUX
 
 const initState = {count: 0};
-const store = createStore(rootReducer, initState, applyMiddleware(thunk));
+const store = createStore(rootReducer, initState, compose(applyMiddleware(thunk, logger),
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 window.store = store;
 
