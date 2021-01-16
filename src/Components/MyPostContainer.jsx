@@ -3,26 +3,33 @@ import { connect } from 'react-redux';
 import Post from './Post';
 import { setPostAC, sendPostAC } from '../redux/actions';
 
-function MyPost({setText, sendPost, myPosts, ...restProps}) {
+function MyPost({setText, sendPost, myPosts, textOfPost, ...restProps}) {
   
+const updateText = (e) => {
+  let value = e.target.value
+  setText(value)
+}
+
   return (
     <div>
       <div>
-      <textarea onChange={(e) => setText(e)}></textarea>
+      <textarea onChange={(e) => updateText(e)} value={textOfPost}></textarea>
       <br/>
       <button onClick={sendPost}>Send</button>
       </div>
      
      <div>
-       {myPosts.posts.map(p => <Post key={p.id} message={p.message} />)}
+       {myPosts.map(p => <Post key={p.id} message={p.message} />)}
      </div>
     </div>
   )
 }
 
 const mapState = (state) => {
+  
 return {
-  myPosts: state.posts //Arr<{message: '', id: num}>
+  myPosts: state.posts.posts, //Arr<{message: '', id: num}>
+  textOfPost: state.posts.textOfPost
 }
 }
 const mapDispatch = (dispatch) => {
