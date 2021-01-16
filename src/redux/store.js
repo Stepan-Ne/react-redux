@@ -1,5 +1,5 @@
-import rootReducer from './rootReducer';
-import { createStore, applyMiddleware, compose } from 'redux'
+import postsReducer from './postsReducer';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
@@ -31,11 +31,13 @@ import logger from 'redux-logger'
 
 
 // REDUX
+const rootReducer = combineReducers({
+  posts: postsReducer
+})
 
-const initState = {count: 0};
-const store = createStore(rootReducer, initState, compose(applyMiddleware(thunk, logger),
+const store = createStore(rootReducer, compose(applyMiddleware(thunk, logger),
 window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
-window.store = store;
+//window.store = store;
 
 export default store;

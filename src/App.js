@@ -1,10 +1,10 @@
 import React from 'react';
-import Counter from './Components/Counter';
+import MyPostContainer from './Components/MyPostContainer';
 
 function App(props) {
   return (
     <div className="App">
-      <Counter {...props} />
+     <MyPostContainer />
     </div>
   );
 }
