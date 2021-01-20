@@ -11,7 +11,7 @@ const styles = {
 function Post(props) {
 
   const {body, id, title} = props.post;
-  //debugger
+  
   return (
     <div style={styles.posts}>
    <Message
