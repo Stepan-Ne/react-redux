@@ -7,8 +7,10 @@ import axios from 'axios';
 function MyPost({setText, sendPost, setPosts, myPosts, textOfPost, ...restProps}) {
   
   useEffect(() => {
-axios.get('https://jsonplaceholder.typicode.com/posts')
-.then(data => setPosts(data))
+axios.get('https://jsonplaceholder.typicode.com/posts?_limit=3')
+.then(data => {
+  console.log(data)
+  setPosts(data)})
   }, [])
 const updateText = (e) => {
   let value = e.target.value

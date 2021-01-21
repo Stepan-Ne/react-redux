@@ -7,8 +7,8 @@ import FormFormik from './Components/FormikForm';
 function App(props) {
   return (
     <div className="App">
-     {/* <MyPostContainer /> */}
-     <FormFormik />
+     <MyPostContainer />
+     {/* <FormFormik /> */}
     </div>
   );
 }
