@@ -1,56 +1,68 @@
 import React from 'react';
-import { Formik, useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-const Form = () => {
+// STYLES
+const styles = {
+    error: {
+        color: 'red',
+        marginTop: '.5rem'
+    }
+}
+// FORMIK
 
-const formik = useFormik({
-    initialValues: {
+  const initialValues = {
         firstName: '',
         lastName: '',
         email: ''
-    },
-    handleChange: (data) => {console.log(data)},
-    handleSubmit: () => {},
-    handleBlur: () => {}
+    };
+   const onSubmit = values => {
+        console.log(values)
+    };
+    
+    const validationSchema = Yup.object({
+        firstName: Yup.string().required('Required'),
+        lastName: Yup.string().required('Required'),
+        email: Yup.string().email('Invalid email address').required('Required')
+    })
 
-})
+const FormFormik = () => {
 
+    // const formik = useFormik({
+    //     initialValues,
+    //     onSubmit,
+    //     validationSchema
+    // })
   return (
-   
-      <form className='ui form' onSubmit={formik.handleSubmit}>
+   <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+      <Form className='ui form'>
 
         <div className='field'>
           <label>First Name</label>
-          <input placeholder='First Name' 
+          <Field placeholder='First Name' 
           autoFocus
            type="text"
            name="firstName"
-           onChange={formik.handleChange}
-           onBlur={formik.handleBlur}
-           value={formik.values.firstName}
           />
+         <ErrorMessage name='firstName'/>
         </div>
 
         <div className='field'>
           <label>Last Name</label>
-          <input placeholder='Last Name' 
+          <Field placeholder='Last Name' 
           type="text"
           name="lastName"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lastName}
           />
+          <ErrorMessage name='lastName'/>
         </div>
 
         <div className='field'>
           <label>Email</label>
-          <input placeholder='email' 
+          <Field placeholder='email' 
           type="email"
           name="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
           />
+           <ErrorMessage name='email'/>
         </div>
 
         <div className='field'>
@@ -64,9 +76,10 @@ const formik = useFormik({
           Submit
         </button>
 
-      </form>
+      </Form>
+      </Formik>
    
   );
 };
 
-export default Form;
+export default FormFormik;
