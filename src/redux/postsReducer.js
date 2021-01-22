@@ -2,7 +2,7 @@ import { UPDATE_MESSAGE, SEND_MESSAGE, SET_POSTS } from '../redux/actions';
 
 const initState = {
   posts: [{ userId: 10101, id: 1010, title: 'Title', body: 'Hello World!'}],
-  textOfPost: ''
+  textOfPost: '',
 };
 
 const rootReducer = (state = initState, action) => {
