@@ -4,6 +4,7 @@ import Post from './Post';
 import { setPostAC, sendPostAC, setPostsAC } from '../redux/actions';
 import axios from 'axios';
 import { withRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 function MyPost({
   setText,
@@ -46,7 +47,9 @@ function MyPost({
 
       <div>
         {myPosts.map((p) => (
+          <NavLink to={"/posts/" + p.id} activeClassName={}>
           <Post key={p.id} post={p} />
+          </NavLink>
         ))}
       </div>
     </div>
