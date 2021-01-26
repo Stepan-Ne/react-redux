@@ -18,6 +18,10 @@ const initialValues = {
   email: '',
   comments: '',
   address: '',
+  social: {
+    facebook: '',
+    twitter: '',
+  },
 };
 const onSubmit = (values) => {
   console.log(values);
@@ -41,18 +45,16 @@ const FormFormik = () => {
       <Form className='ui form'>
         <div className='field'>
           <label>First Name</label>
-          <Field placeholder='First Name'  type='text' name='firstName' />
-          <ErrorMessage name='firstName' component={TextError}/>
+          <Field placeholder='First Name' type='text' name='firstName' />
+          <ErrorMessage name='firstName' component={TextError} />
         </div>
 
         <div className='field'>
           <label>Last Name</label>
           <Field placeholder='Last Name' type='text' name='lastName' />
           <ErrorMessage name='lastName'>
-            {
-              (errorMsg) => <div className='error'>{errorMsg}</div>
-            }
-            </ErrorMessage>
+            {(errorMsg) => <div className='error'>{errorMsg}</div>}
+          </ErrorMessage>
         </div>
 
         <div className='field'>
@@ -73,16 +75,26 @@ const FormFormik = () => {
         <div className='form-control'>
           <label htmlFor='address'>Address</label>
           <Field name='address'>
-            {
-              (props) => {
-                const {field, form, meta} = props
-                return <div>
-                  <input type='text' id='address' {...field}/>
-                  { meta.touched && meta.error ? <div>{meta.error}</div> : null }
-                  </div>
-              }
-            }
+            {(props) => {
+              const { field, form, meta } = props;
+              return (
+                <div>
+                  <input type='text' id='address' {...field} />
+                  {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+                </div>
+              );
+            }}
           </Field>
+        </div>
+
+        <div className='form-control'>
+          <label htmlFor='facebook'>Facebook</label>
+          <Field type='text' name='social.facebook' id='facebook'/>
+        </div>
+
+        <div className='form-control'>
+          <label htmlFor='twitter'>Twitter</label>
+          <Field type='text' name='social.twitter' id='twitter'/>
         </div>
 
         <button type='submit' className='ui button'>
