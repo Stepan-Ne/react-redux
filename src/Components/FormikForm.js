@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import TextError from '../TextError';
 
@@ -22,6 +22,7 @@ const initialValues = {
     facebook: '',
     twitter: '',
   },
+  phNumbers: [''],
 };
 const onSubmit = (values) => {
   console.log(values);
@@ -89,17 +90,48 @@ const FormFormik = () => {
 
         <div className='form-control'>
           <label htmlFor='facebook'>Facebook</label>
-          <Field type='text' name='social.facebook' id='facebook'/>
+          <Field type='text' name='social.facebook' id='facebook' />
         </div>
 
         <div className='form-control'>
           <label htmlFor='twitter'>Twitter</label>
-          <Field type='text' name='social.twitter' id='twitter'/>
+          <Field type='text' name='social.twitter' id='twitter' />
         </div>
 
-        <button type='submit' className='ui button'>
-          Submit
-        </button>
+        <div className='form-control'>
+          <label htmlFor='phNumbers'>List of phone numbers</label>
+          <FieldArray name='phNumbers'>
+            {(fieldArrayProps) => {
+              const { push, remove, form } = fieldArrayProps;
+              const { values } = form;
+              const { phNumbers } = values; // arr
+
+              return (
+                <div>
+                  {phNumbers.map((phNumber, index) => (
+                    <div key={index} className='form-control'>
+                      <Field name={`phNumbers[${index}]`} />
+                      {index > 0 && (
+                        <button type='button' onClick={() => remove(index)}>
+                          -
+                        </button>
+                      )}
+                      <button type='button' onClick={() => push('')}>
+                        +
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
+        </div>
+
+        <div>
+          <button type='submit' className='ui button'>
+            Submit
+          </button>
+        </div>
       </Form>
     </Formik>
   );
