@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 function App(props) {
   return (
     <div>
-      <div class='ui  menu'>
+      <div className='ui  menu'>
         <NavLink
           to='/posts'
           className='orange item'

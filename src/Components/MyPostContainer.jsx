@@ -37,6 +37,7 @@ function MyPost({
   //   })
   // }
 
+
   return (
     <div>
       <div>
@@ -47,7 +48,7 @@ function MyPost({
 
       <div>
         {myPosts.map((p) => (
-          <NavLink to={"/posts/" + p.id} activeClassName={}>
+          <NavLink to={"/posts/" + p.id} key={p.id.toString()}>
           <Post key={p.id} post={p} />
           </NavLink>
         ))}
@@ -71,5 +72,7 @@ const mapDispatch = {
 
 const MyPostWithRouter = withRouter(MyPost)
 const MyPostContainer = connect(mapState, mapDispatch)(MyPostWithRouter);
+
+
 
 export default MyPostContainer;
