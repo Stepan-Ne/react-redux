@@ -1,5 +1,7 @@
 import React from 'react';
 import PostForm from './Components/PostForm';
+import Posts from './Components/Posts';
+import FetchedPosts from './Components/FetchedPosts';
 function App() {
   return (
     <div className='container pt-3'>
@@ -12,9 +14,11 @@ function App() {
       <div className='row'>
         <div className='col'>
           <h2>Posts</h2>
+          <Posts listPosts={[1, 2, 3]}/>
         </div>
         <div className='col'>
           <h2>Fetched Posts</h2>
+          <FetchedPosts />
         </div>
       </div>
     </div>

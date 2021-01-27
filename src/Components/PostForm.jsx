@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
 export default class PostForm extends Component {
+
   constructor(props) {
     super(props);
     this.state = { value: '' };
   }
+  // Handlers
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state.value);
@@ -13,6 +15,7 @@ export default class PostForm extends Component {
   handleChange = (e) => {
     this.setState({value: e.target.value});
   };
+  // JSX
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
