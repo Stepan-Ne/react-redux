@@ -2,7 +2,7 @@ import React from 'react';
 import MyPostContainer from './Components/MyPostContainer';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
-import FormFormik from './Components/FormikForm';
+import FormikContainer from './Components/FormikContainer';
 import { Route } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ function App(props) {
       </div>
       <div className='App'>
         <Route path='/posts' render={() => <MyPostContainer />} />
-        <Route path='/form' render={() => <FormFormik />} />
+        <Route path='/form' render={() => <FormikContainer />} />
       </div>
     </div>
   );
