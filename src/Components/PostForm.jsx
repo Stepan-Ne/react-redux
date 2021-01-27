@@ -8,14 +8,19 @@ export default class PostForm extends Component {
   // Handlers
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    //this.setState({ postText: '' });
+    // make body of post
+    const {title, postText} = this.state
+    const newPost = { title, postText, id: Date.now().toString()}
+    
+    // clear input fields
+    this.setState({ title: '', postText: '' });
   };
   handleChange = (e) => {
-    this.setState((prev) => ({
-      ...prev,
-      ...{ [e.target.name]: e.target.value },
-    }));
+      this.setState( prev => ({
+          ...prev, ...{
+              [e.target.name]: e.target.value
+          }
+      }))
   };
   // JSX
   render() {
@@ -31,6 +36,7 @@ export default class PostForm extends Component {
             className='form-control'
             id='title'
             name='title'
+            value={this.state.title}
             onChange={this.handleChange}
           />
         </div>
@@ -44,12 +50,13 @@ export default class PostForm extends Component {
             id='post'
             name='postText'
             rows='2'
-            value={this.state.value}
+            value={this.state.postText}
             onChange={this.handleChange}
           ></textarea>
         </div>
 
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' disabled={!this.state.title || !this.state.postText}
+        className='btn btn-primary'>
           Submit
         </button>
       </form>
