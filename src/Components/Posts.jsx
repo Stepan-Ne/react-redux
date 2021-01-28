@@ -1,14 +1,21 @@
 import React from 'react';
 import Post from './Post';
+import { connect } from 'react-redux';
 
-function Posts({ listPosts }) {
+function Posts({ syncPosts }) {
     return (
         <div>
-            {listPosts.map(p => {
-                return <Post key={p} title={p}/>
-            })}
+            {syncPosts.map(p => <Post title={p.title}
+             postText={p.postText} key={p.id} id={p.id}/>)}
         </div>
     )
 }
 
-export default Posts;
+const mapState = state => {
+   
+    return {
+        syncPosts: state.posts.posts
+    }
+}
+
+export default connect(mapState, null)(Posts);

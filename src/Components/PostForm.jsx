@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createPost } from '../Redux/actions'
 
-export default class PostForm extends Component {
+ class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = { title: '', postText: '' };
@@ -8,13 +10,20 @@ export default class PostForm extends Component {
   // Handlers
   handleSubmit = (e) => {
     e.preventDefault();
-    // make body of post
+   
     const {title, postText} = this.state
+    // check input fields
+    if (!title.trim() || ! postText.trim()) {
+        return;
+    }
+ // make body of post
     const newPost = { title, postText, id: Date.now().toString()}
-    
+    // send post to store
+    this.props.createPost(newPost)
     // clear input fields
     this.setState({ title: '', postText: '' });
   };
+
   handleChange = (e) => {
       this.setState( prev => ({
           ...prev, ...{
@@ -63,3 +72,5 @@ export default class PostForm extends Component {
     );
   }
 }
+
+export default connect(null, {createPost})(PostForm)

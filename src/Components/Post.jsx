@@ -1,12 +1,14 @@
 import { findByTitle } from '@testing-library/react'
 import React from 'react'
 
-function Post({ title }) {
+function Post({ title, postText, id }) {
     return (
         <div>
-            {title}
+            <h3>{title}</h3>
+            <p>{postText}</p>
+            
         </div>
     )
 }
 
-export default Post
+export default Post;
