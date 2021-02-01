@@ -1,0 +1,39 @@
+.App {
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+  background: palevioletred;
+  color: white;
+}
+
+.nav_links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  width: 50%;
+  
+  
+}
+.nav_links a {
+  color: white;
+  text-decoration: none;
+
+}
+.link_post  {
+  text-decoration: none;
+  color: black;
+}
+
+.form {
+  max-width: 50%;
+  border: 2px solid grey;
+  border-radius: 4px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
