@@ -1,9 +1,10 @@
 import React from 'react';
+import '../App';
 
 
 function About() {
   return (
-    <div>
+    <div className='about'>
       <h2> In this application I have used:</h2>
      
       <table class="table">
