@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Post from './Post';
 import FormSubmit from './FormSubmit';
 import { fetchPostsThunk } from '../redux/postReducer';

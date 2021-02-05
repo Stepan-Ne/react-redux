@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {sendPostThunkCreator} from '../redux/postReducer';
 import '../App';
 
 function FormSubmit() {
   const [state, setState] = useState('');
   const [alert, setAlert] = useState(false);
+
+  const dispatch = useDispatch()
 
   function handleInput(e) {
     setState(e.target.value);
@@ -12,7 +16,7 @@ function FormSubmit() {
   function submitHandler(e) {
     e.preventDefault();
     if (state.trim()) {
-      console.log(state);
+      dispatch(sendPostThunkCreator(state))
     } else {
       setAlert(true);
     }

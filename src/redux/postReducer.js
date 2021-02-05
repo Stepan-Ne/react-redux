@@ -1,6 +1,7 @@
 import { showLoaderAC, hideLoaderAC } from './appReducer';
 
 const FETCH_POSTS = 'FETCH_POSTS';
+const SEND_POST = 'SEND_POST';
 
 const initState = {
   posts: [],
@@ -13,6 +14,11 @@ const postReducer = (state = initState, action) => {
         ...state,
         posts: [...action.posts],
       };
+      case SEND_POST:
+        return {
+          ...state,
+          posts: [action.post, ...state.posts]
+        }
 
     default:
       return state;
@@ -25,6 +31,11 @@ export const fetchPostsAC = (posts) => ({
   type: FETCH_POSTS,
   posts,
 });
+
+export const sendPostAC = (post) => ({
+  type: SEND_POST,
+  post
+})
 
 // This is an action creator that returns a thunk:
 // 1. we dispatch thunk & redux put dispacth to the thunk as arg
@@ -39,6 +50,7 @@ export const fetchPostsAC = (posts) => ({
 //   .then(res => dispatch(fetchPostsAC(res)))
 // }
 
+// GET Posts
 export function fetchPostsThunk() {
   return async (dispatch) => {
     try {
@@ -56,5 +68,30 @@ export function fetchPostsThunk() {
     }
     
   };
+};
+
+
+// SEND Post
+export function sendPostThunkCreator(postText) {
+return async (dispatch) => {
+  dispatch(showLoaderAC());
+  const data = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify({
+      title: 'foo',
+      body: postText,
+      userId: 1,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+
+  const response = await data.json()
+  setTimeout(() => {
+    dispatch(sendPostAC(response));
+    dispatch(hideLoaderAC());
+  }, 500);
+}
 }
 export default postReducer;
