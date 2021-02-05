@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import '../App';
 
 function FormSubmit() {
-
   const [state, setState] = useState('');
+  const [alert, setAlert] = useState(false);
 
   function handleInput(e) {
     setState(e.target.value);
+    setAlert(false);
   }
   function submitHandler(e) {
     e.preventDefault();
-    console.log(state);
-    
+    if (state.trim()) {
+      console.log(state);
+    } else {
+      setAlert(true);
+    }
   }
 
   return (
@@ -28,7 +32,17 @@ function FormSubmit() {
           onChange={handleInput}
         />
       </div>
-      <button type='submit' className='btn btn-primary' onClick={submitHandler}>
+
+      {alert ? (
+        <div class='alert alert-danger' role='alert'>
+          The field is empty!
+        </div>
+      ) : null}
+
+      <button type='submit' className='btn btn-primary' 
+      disabled={state ? false : true}
+      
+      onClick={submitHandler}>
         Submit
       </button>
     </form>

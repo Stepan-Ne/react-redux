@@ -23,7 +23,18 @@ nav {
 .nav_links a {
   color: white;
   text-decoration: none;
+  font-size: 1em;
+  margin: 0;
+  text-align: center;
+  -webkit-transition: font-size .5s ease;
+  -moz-transition: font-size .5s ease;
+  -o-transition: font-size .5s ease;
+  transition: font-size .5s ease;
 
+}
+.a_active {
+  font-size: 1.5em;
+  color: '#0d6efd';
 }
 .link_post  {
   text-decoration: none;

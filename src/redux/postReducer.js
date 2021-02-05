@@ -1,17 +1,17 @@
+import { showLoaderAC, hideLoaderAC } from './appReducer';
+
 const FETCH_POSTS = 'FETCH_POSTS';
-const SHOW_LOADER = 'SHOW_LOADER';
-const HIDE_LOADER = 'HIDE_LOADER';
+
 const initState = {
-  posts: []
+  posts: [],
 };
 
 const postReducer = (state = initState, action) => {
-  
   switch (action.type) {
     case FETCH_POSTS:
       return {
         ...state,
-        posts: [...action.posts]
+        posts: [...action.posts],
       };
 
     default:
@@ -41,11 +41,20 @@ export const fetchPostsAC = (posts) => ({
 
 export function fetchPostsThunk() {
   return async (dispatch) => {
+    try {
+      dispatch(showLoaderAC());
     const data = await fetch(
-      'https://jsonplaceholder.typicode.com/posts?_limit=5'
+      'https://jsonplaceholder.typicode.com/posts?_limit=2'
     );
     const response = await data.json();
-    dispatch(fetchPostsAC(response))
+    setTimeout(() => {
+      dispatch(fetchPostsAC(response));
+      dispatch(hideLoaderAC());
+    }, 500);
+    } catch (error) {
+      throw error
+    }
+    
   };
 }
 export default postReducer;
